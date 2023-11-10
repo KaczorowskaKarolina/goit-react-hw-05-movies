@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 const Home = lazy(() => import('./components/Home'));
 const Movies = lazy(() => import('./components/Movies'));
@@ -11,11 +11,13 @@ const App = () => {
   return (
     <Router>
       <Suspense fallback={<div>Loading...</div>}>
-        <Route exact path="/" render={(props) => <Home {...props} apiKey="264ec641025fff32d6f5c8134722997b" />} />
-        <Route exact path="/movies" render={(props) => <Movies {...props} apiKey="264ec641025fff32d6f5c8134722997b" />} />
-        <Route exact path="/movies/:movieId" render={(props) => <MovieDetails {...props} apiKey="264ec641025fff32d6f5c8134722997b" />} />
-        <Route exact path="/movies/:movieId/cast" render={(props) => <Cast {...props} apiKey="264ec641025fff32d6f5c8134722997b" />} />
-        <Route exact path="/movies/:movieId/reviews" render={(props) => <Reviews {...props} apiKey="264ec641025fff32d6f5c8134722997b" />} />
+        <Routes>
+          <Route exact path="/" element={<Home apiKey="264ec641025fff32d6f5c8134722997b" />} />
+          <Route exact path="/movies" element={<Movies apiKey="264ec641025fff32d6f5c8134722997b" />} />
+          <Route exact path="/movies/:movieId" element={<MovieDetails apiKey="264ec641025fff32d6f5c8134722997b" />} />
+          <Route exact path="/movies/:movieId/cast" element={<Cast apiKey="264ec641025fff32d6f5c8134722997b" />} />
+          <Route exact path="/movies/:movieId/reviews" element={<Reviews apiKey="264ec641025fff32d6f5c8134722997b" />} />
+        </Routes>
       </Suspense>
     </Router>
   );

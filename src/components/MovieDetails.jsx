@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import { Route, useParams } from 'react-router-dom'; 
+import { Route, Routes, useParams } from 'react-router-dom';
 
 const MovieDetails = React.lazy(() => import('./MovieDetails'));
 const Cast = React.lazy(() => import('./Cast'));
@@ -10,9 +10,11 @@ const MovieDetailsWrapper = ({ apiKey }) => {
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <Route path={`/movies/${movieId}`} exact render={(props) => <MovieDetails {...props} apiKey={apiKey} />} />
-      <Route path={`/movies/${movieId}/cast`} render={(props) => <Cast {...props} apiKey={apiKey} />} />
-      <Route path={`/movies/${movieId}/reviews`} render={(props) => <Reviews {...props} apiKey={apiKey} />} />
+      <Routes>
+        <Route path="/" element={<MovieDetails apiKey={apiKey} movieId={movieId} />} />
+        <Route path="/cast" element={<Cast apiKey={apiKey} movieId={movieId} />} />
+        <Route path="/reviews" element={<Reviews apiKey={apiKey} movieId={movieId} />} />
+      </Routes>
     </Suspense>
   );
 };
