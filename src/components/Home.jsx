@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import { Route } from 'react-router-dom';
 
 const Trending = React.lazy(() => import('./Trending'));
-const SearchMovies = React.lazy(() => import('./SearchMovies'));
+const SearchMovies = React.lazy(() => import('./Movies'));
 const MovieDetails = React.lazy(() => import('./MovieDetails'));
 
 const apiKey = '264ec641025fff32d6f5c8134722997b';

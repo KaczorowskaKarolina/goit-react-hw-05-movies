@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import { Route, useParams } from 'react-router-dom'; 
 
-const MovieDetails = React.lazy(() => import('./MovieDetailsContent'));
+const MovieDetails = React.lazy(() => import('./MovieDetails'));
 const Cast = React.lazy(() => import('./Cast'));
 const Reviews = React.lazy(() => import('./Reviews'));
 
