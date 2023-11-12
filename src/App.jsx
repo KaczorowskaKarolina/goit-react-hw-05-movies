@@ -7,16 +7,16 @@ const MovieDetails = lazy(() => import('./components/MovieDetails'));
 const Cast = lazy(() => import('./components/Cast'));
 const Reviews = lazy(() => import('./components/Reviews'));
 
-const App = () => {
+const App = ({REACT_APP_API_KEY}) => {
   return (
     <Router>
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
-          <Route exact path="/" element={<Home apiKey="264ec641025fff32d6f5c8134722997b" />} />
-          <Route exact path="/movies" element={<Movies apiKey="264ec641025fff32d6f5c8134722997b" />} />
-          <Route exact path="/movies/:movieId" element={<MovieDetails apiKey="264ec641025fff32d6f5c8134722997b" />} />
-          <Route exact path="/movies/:movieId/cast" element={<Cast apiKey="264ec641025fff32d6f5c8134722997b" />} />
-          <Route exact path="/movies/:movieId/reviews" element={<Reviews apiKey="264ec641025fff32d6f5c8134722997b" />} />
+          <Route exact path="*" element={<Home REACT_APP_API_KEY />} />
+          <Route exact path="/movies" element={<Movies REACT_APP_API_KEY />} />
+          <Route exact path="/movies/:movieId" element={<MovieDetails REACT_APP_API_KEY />} />
+          <Route exact path="/movies/:movieId/cast" element={<Cast REACT_APP_API_KEY />} />
+          <Route exact path="/movies/:movieId/reviews" element={<Reviews REACT_APP_API_KEY />} />
         </Routes>
       </Suspense>
     </Router>

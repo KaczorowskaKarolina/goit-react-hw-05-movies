@@ -7,7 +7,7 @@ const Movies = () => {
   const handleSearch = async () => {
     try {
       const response = await fetch(
-        `https://api.themoviedb.org/3/search/movie?api_key=264ec641025fff32d6f5c8134722997b&query=${searchQuery}`
+        `https://api.themoviedb.org/3/search/movie?REACT_APP_API_KEY=${searchQuery}`
       );
 
       if (!response.ok) {

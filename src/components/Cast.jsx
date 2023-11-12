@@ -7,7 +7,7 @@ const Cast = ({ movieId }) => {
     const fetchCast = async () => {
       try {
         const response = await fetch(
-          `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=264ec641025fff32d6f5c8134722997b`
+          `https://api.themoviedb.org/3/movie/${movieId}/credits?REACT_APP_API_KEY`
         );
 
         if (!response.ok) {

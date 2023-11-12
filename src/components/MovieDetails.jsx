@@ -5,15 +5,15 @@ const MovieDetails = React.lazy(() => import('./MovieDetails'));
 const Cast = React.lazy(() => import('./Cast'));
 const Reviews = React.lazy(() => import('./Reviews'));
 
-const MovieDetailsWrapper = ({ apiKey }) => {
+const MovieDetailsWrapper = ({ REACT_APP_API_KEY }) => {
   const { movieId } = useParams();
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <Routes>
-        <Route path="/" element={<MovieDetails apiKey={apiKey} movieId={movieId} />} />
-        <Route path="/cast" element={<Cast apiKey={apiKey} movieId={movieId} />} />
-        <Route path="/reviews" element={<Reviews apiKey={apiKey} movieId={movieId} />} />
+        <Route path="/" element={<MovieDetails apiKey={REACT_APP_API_KEY} movieId={movieId} />} />
+        <Route path="/cast" element={<Cast apiKey={REACT_APP_API_KEY} movieId={movieId} />} />
+        <Route path="/reviews" element={<Reviews apiKey={REACT_APP_API_KEY} movieId={movieId} />} />
       </Routes>
     </Suspense>
   );
