@@ -32,34 +32,60 @@
 // export default App;
 
 
-import React, { Suspense, lazy, useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import axios from 'axios';
+// import React, { Suspense, lazy, useEffect, useState } from 'react';
+// import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+// import axios from 'axios';
 
-const Home = lazy(() => import('./components/Home'));
-const Movies = lazy(() => import('./components/Movies'));
-const MovieDetails = lazy(() => import('./components/MovieDetails'));
-const Cast = lazy(() => import('./components/Cast'));
-const Reviews = lazy(() => import('./components/Reviews'));
+// const Home = lazy(() => import('./components/Home'));
+// const Movies = lazy(() => import('./components/Movies'));
+// const MovieDetails = lazy(() => import('./components/MovieDetails'));
+// const Cast = lazy(() => import('./components/Cast'));
+// const Reviews = lazy(() => import('./components/Reviews'));
+
+// const App = () => {
+//   const [apiKey] = useState(process.env.REACT_APP_API_KEY);
+
+//   useEffect(() => {
+//   console.log('API Key:', apiKey);
+//   const fetchData = async () => {
+//     try {
+//       const result = await axios.get(
+//         `https://api.themoviedb.org/3/movie/?api_key=${apiKey}&query=someDefaultValue&per_page=12&page=1`
+//       );
+//       console.log(result.data); // Use the data or remove this line if not needed
+//     } catch (error) {
+//       console.error('Error fetching data:', error.message);
+//     }
+//   };
+//   fetchData();
+// }, [apiKey]);
+
+
+//   return (
+//     <Router>
+//       <Suspense fallback={<div>Loading...</div>}>
+//         <Routes>
+//           <Route path="*" element={<Home apiKey={apiKey} />} />
+//           <Route path="/movies" element={<Movies apiKey={apiKey} />} />
+//           <Route path="/movies/:movieId" element={<MovieDetails apiKey={apiKey} />} />
+//           <Route path="/movies/:movieId/cast" element={<Cast apiKey={apiKey} />} />
+//           <Route path="/movies/:movieId/reviews" element={<Reviews apiKey={apiKey} />} />
+//         </Routes>
+//       </Suspense>
+//     </Router>
+//   );
+// };
+
+// export default App;
+
+
+import React, { Suspense } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Home from './components/Home';
+import Movies from './components/Movies';
 
 const App = () => {
-  const [apiKey] = useState(process.env.REACT_APP_API_KEY);
-
-  useEffect(() => {
-  console.log('API Key:', apiKey);
-  const fetchData = async () => {
-    try {
-      const result = await axios.get(
-        `https://api.themoviedb.org/3/movie/?api_key=${apiKey}&query=someDefaultValue&per_page=12&page=1`
-      );
-      console.log(result.data); // Use the data or remove this line if not needed
-    } catch (error) {
-      console.error('Error fetching data:', error.message);
-    }
-  };
-  fetchData();
-}, [apiKey]);
-
+  const apiKey = process.env.REACT_APP_API_KEY;
 
   return (
     <Router>
@@ -67,9 +93,6 @@ const App = () => {
         <Routes>
           <Route path="*" element={<Home apiKey={apiKey} />} />
           <Route path="/movies" element={<Movies apiKey={apiKey} />} />
-          <Route path="/movies/:movieId" element={<MovieDetails apiKey={apiKey} />} />
-          <Route path="/movies/:movieId/cast" element={<Cast apiKey={apiKey} />} />
-          <Route path="/movies/:movieId/reviews" element={<Reviews apiKey={apiKey} />} />
         </Routes>
       </Suspense>
     </Router>
