@@ -27,7 +27,6 @@ const Reviews = ({ movieId }) => {
   return (
     <div>
       <h2>Reviews</h2>
-      {/* Display the list of reviews */}
       {reviews.map((review) => (
         <div key={review.id}>{review.content}</div>
       ))}

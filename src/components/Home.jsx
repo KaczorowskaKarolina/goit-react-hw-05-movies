@@ -1,42 +1,3 @@
-// import React, { useEffect, useState } from 'react';
-// import axios from 'axios';
-// import { Link } from 'react-router-dom';
-// import './home.css';
-
-// const Home = ({ apiKey }) => {
-//   const [trending, setTrending] = useState([]);
-
-//   useEffect(() => {
-//     const fetchTrending = async () => {
-//       try {
-//         const response = await axios.get(
-//           `https://api.themoviedb.org/3/trending/all/day?api_key=${apiKey}`
-//         );
-//         setTrending(response.data.results);
-//       } catch (error) {
-//         console.error('Error fetching trending data:', error.message);
-//       }
-//     };
-
-//     fetchTrending();
-//   }, [apiKey]);
-
-//   return (
-//     <div>
-//       <h2>Trending Today</h2>
-//       <ul>
-//         {trending.map((item) => (
-//   <li key={item.id}>
-//     <Link to={`/movies/${item.id}`}>{item.title || item.name}</Link>
-//   </li>
-// ))}
-//       </ul>
-//     </div>
-//   );
-// };
-
-// export default Home;
-
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -70,7 +31,7 @@ const Home = ({ apiKey }) => {
           </li>
         ))}
       </ul>
-    </div>
+</div>
   );
 };
 

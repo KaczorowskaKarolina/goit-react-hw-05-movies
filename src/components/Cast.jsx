@@ -27,7 +27,6 @@ const Cast = ({ movieId }) => {
   return (
     <div>
       <h2>Cast</h2>
-      {/* Display the list of cast members */}
       {cast.map((member) => (
         <div key={member.id}>{member.name}</div>
       ))}
