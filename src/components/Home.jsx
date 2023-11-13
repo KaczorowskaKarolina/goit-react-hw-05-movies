@@ -1,28 +1,7 @@
-// import React, { Suspense } from 'react';
-// import { Route, Routes } from 'react-router-dom';
-
-// const Trending = React.lazy(() => import('./Trending'));
-// const SearchMovies = React.lazy(() => import('./Movies'));
-// const MovieDetails = React.lazy(() => import('./MovieDetails'));
-
-// const Home = ({REACT_APP_API_KEY}) => {
-//   return (
-//     <Suspense fallback={<div>Loading...</div>}>
-//       <Routes>
-//         <Route path="/" element={<Trending apiKey={REACT_APP_API_KEY} />} />
-//         <Route path="/movies" element={<SearchMovies apiKey={REACT_APP_API_KEY} />} />
-//         <Route path="/movies/:movieId" element={<MovieDetails apiKey={REACT_APP_API_KEY} />} />
-//       </Routes>
-//     </Suspense>
-//   );
-// };
-
-// export default Home;
-
-
-// components/Home.jsx
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+import './home.css';
 
 const Home = ({ apiKey }) => {
   const [trending, setTrending] = useState([]);
@@ -47,7 +26,9 @@ const Home = ({ apiKey }) => {
       <h2>Trending Today</h2>
       <ul>
         {trending.map((item) => (
-          <li key={item.id}>{item.title || item.name}</li>
+          <li key={item.id}>
+            <Link to={`/movies/${item.id}`}>{item.title || item.name}</Link>
+          </li>
         ))}
       </ul>
     </div>

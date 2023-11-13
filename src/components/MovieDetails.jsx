@@ -1,11 +1,10 @@
 import React, { Suspense } from 'react';
 import { Route, Routes, useParams } from 'react-router-dom';
 
-const MovieDetails = React.lazy(() => import('./MovieDetails'));
 const Cast = React.lazy(() => import('./Cast'));
 const Reviews = React.lazy(() => import('./Reviews'));
 
-const MovieDetailsWrapper = ({ REACT_APP_API_KEY }) => {
+const MovieDetails = ({ REACT_APP_API_KEY }) => {
   const { movieId } = useParams();
 
   return (
@@ -19,4 +18,4 @@ const MovieDetailsWrapper = ({ REACT_APP_API_KEY }) => {
   );
 };
 
-export default MovieDetailsWrapper;
+export default MovieDetails;

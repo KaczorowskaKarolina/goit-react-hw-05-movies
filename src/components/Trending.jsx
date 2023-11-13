@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
-const Trending = () => {
+const Trending = ({ apiKey }) => {
   const [trendingMovies, setTrendingMovies] = useState([]);
 
   useEffect(() => {
     const fetchTrendingMovies = async () => {
       try {
-        const response = await fetch(
-          `https://api.themoviedb.org/3/trending/all/day?REACT_APP_API_KEY`
+        const response = await axios.get(
+          `https://api.themoviedb.org/3/trending/all/day?api_key=${apiKey}`
         );
 
         if (!response.ok) {
@@ -22,12 +23,11 @@ const Trending = () => {
     };
 
     fetchTrendingMovies();
-  }, []);
+  }, [apiKey]);
 
   return (
     <div>
       <h2>Trending Movies</h2>
-      {/* Display the list of trending movies */}
       {trendingMovies.map((movie) => (
         <div key={movie.id}>{movie.title}</div>
       ))}
