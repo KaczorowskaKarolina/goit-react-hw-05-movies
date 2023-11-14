@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react';
 
-const Cast = ({ movieId }) => {
+const Cast = ({ apiKey, movieId }) => {
   const [cast, setCast] = useState([]);
 
   useEffect(() => {
     const fetchCast = async () => {
       try {
         const response = await fetch(
-          `https://api.themoviedb.org/3/movie/${movieId}/credits?REACT_APP_API_KEY`
+          `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${apiKey}`
         );
-
         if (!response.ok) {
           throw new Error('Failed to fetch cast details');
         }
@@ -22,7 +21,7 @@ const Cast = ({ movieId }) => {
     };
 
     fetchCast();
-  }, [movieId]);
+  }, [movieId, apiKey]);
 
   return (
     <div>

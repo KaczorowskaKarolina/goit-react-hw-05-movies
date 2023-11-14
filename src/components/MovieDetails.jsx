@@ -16,12 +16,11 @@ const MovieDetails = ({ REACT_APP_API_KEY }) => {
           `https://api.themoviedb.org/3/movie/${movieId}?api_key=${REACT_APP_API_KEY}`
         );
 
-        if (!response.ok) {
+        if (response.status !== 200) {
           throw new Error('Failed to fetch movie details');
         }
 
-        const data = await response.json();
-        setMovieDetails(data);
+        setMovieDetails(response.data);
       } catch (error) {
         console.error('Error fetching movie details:', error.message);
       }
