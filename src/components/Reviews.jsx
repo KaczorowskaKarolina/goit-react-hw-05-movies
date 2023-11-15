@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const Reviews = ({ apiKey, movieId }) => {
   const [reviews, setReviews] = useState([]);
@@ -6,16 +7,15 @@ const Reviews = ({ apiKey, movieId }) => {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const response = await fetch(
-          `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${apiKey}`
+        const response = await axios.get(
+          `https://api.themoviedb.org/3/movie/${movieId}/reviews?api_key=${apiKey}`
         );
 
-        if (!response.ok) {
+        if (response.status !== 200) {
           throw new Error('Failed to fetch reviews');
         }
 
-        const data = await response.json();
-        setReviews(data.results);
+        setReviews(response.data.results);
       } catch (error) {
         console.error('Error fetching reviews:', error.message);
       }
@@ -26,10 +26,19 @@ const Reviews = ({ apiKey, movieId }) => {
 
   return (
     <div>
-      <h2>Reviews</h2>
-      {reviews.map((review) => (
-        <div key={review.id}>{review.content}</div>
-      ))}
+      <h3>Reviews</h3>
+      {reviews && reviews.length > 0 ? (
+        <ul>
+          {reviews.map((review) => (
+            <li key={review.id}>
+              <p>{review.author}</p>
+              <p>{review.content}</p>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No reviews available.</p>
+      )}
     </div>
   );
 };

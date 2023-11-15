@@ -1,83 +1,80 @@
-import React, { useEffect, useState, Suspense } from 'react';
-import { Route, Routes, useParams, Link } from 'react-router-dom';
+import React, { useState, useEffect, useCallback, Suspense } from 'react';
 import axios from 'axios';
+import { Link, useParams } from 'react-router-dom';
+import MovieDetails from './MovieDetails';
+import './movies.css';
 
-const Cast = React.lazy(() => import('./Cast'));
-const Reviews = React.lazy(() => import('./Reviews'));
+const Movies = ({ apiKey }) => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  const [genres, setGenres] = useState({}); // Define genres state
 
-const MovieDetails = ({ REACT_APP_API_KEY }) => {
   const { movieId } = useParams();
-  const [movieDetails, setMovieDetails] = useState(null);
-  const [genres, setGenres] = useState([]);
+
+  const handleSearch = useCallback(async () => {
+    try {
+      const response = await axios.get(
+        `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${searchTerm}`
+      );
+      setSearchResults(response.data.results);
+    } catch (error) {
+      console.error('Error searching movies:', error.message);
+    }
+  }, [apiKey, searchTerm]);
 
   useEffect(() => {
-    const fetchMovieDetails = async () => {
-      try {
-        if (!movieId) {
-          throw new Error('Movie ID is not available.');
-        }
-
-        const response = await axios.get(
-          `https://api.themoviedb.org/3/movie/${movieId}?api_key=${REACT_APP_API_KEY}`
-        );
-
-        if (response.status !== 200) {
-          throw new Error('Failed to fetch movie details');
-        }
-
-        setMovieDetails(response.data);
-      } catch (error) {
-        console.error('Error fetching movie details:', error.message);
-      }
-    };
-
     const fetchGenres = async () => {
       try {
         const response = await axios.get(
-          `https://api.themoviedb.org/3/genre/movie/list?api_key=${REACT_APP_API_KEY}`
+          `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}`
         );
-
-        if (response.status !== 200) {
-          throw new Error('Failed to fetch genres');
-        }
-
-        setGenres(response.data.genres);
+        const genresMap = {};
+        response.data.genres.forEach((genre) => {
+          genresMap[genre.id] = genre.name;
+        });
+        setGenres(genresMap);
       } catch (error) {
         console.error('Error fetching genres:', error.message);
       }
     };
 
-    fetchMovieDetails();
-    fetchGenres();
-  }, [REACT_APP_API_KEY, movieId]);
+    fetchGenres(); // Move fetchGenres inside the useEffect callback
+    handleSearch();
+  }, [apiKey, handleSearch]); // Use correct dependency array
 
-  const getGenreName = (genreId) => {
-    const genre = genres.find((g) => g.id === genreId);
-    return genre ? genre.name : '';
+  const getGenreNames = (genreIds) => {
+    return genreIds.map((genreId) => genres[genreId]).join(', ');
   };
 
   return (
-    <div>
-      {movieDetails ? (
-        <div>
-          <h2>{movieDetails.title}</h2>
-          <p>{movieDetails.overview}</p>
-          <p>Genre: {getGenreName(movieDetails.genre_ids[0])}</p>
-          <Link to={`/movies/${movieId}/cast`}>View Cast</Link>
-          <Link to={`/movies/${movieId}/reviews`}>View Reviews</Link>
-        </div>
-      ) : (
-        <div>Loading...</div>
-      )}
+  <div>
+    <h2>Movies</h2>
+    <input
+      type="text"
+      placeholder="movie title..."
+      value={searchTerm}
+      onChange={(e) => setSearchTerm(e.target.value)}
+    />
+    <button onClick={handleSearch}>Search</button>
+    <ul>
+      {searchResults.map((movie) => (
+        <li key={movie.id}>
+          <Link to={`/movies/${movie.id}`}>
+            <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={movie.title} />
+            <p>{movie.overview}</p>
+            <p>Genres: {getGenreNames(movie.genre_ids)}</p>
+          </Link>
+        </li>
+      ))}
+    </ul>
 
+    {movieId && (
       <Suspense fallback={<div>Loading...</div>}>
-        <Routes>
-          <Route path="cast" element={<Cast REACT_APP_API_KEY={REACT_APP_API_KEY} movieId={movieId} />} />
-          <Route path="reviews" element={<Reviews REACT_APP_API_KEY={REACT_APP_API_KEY} movieId={movieId} />} />
-        </Routes>
+        <MovieDetails apiKey={apiKey} movieId={movieId} />
       </Suspense>
-    </div>
-  );
+    )}
+  </div>
+);
 };
 
-export default MovieDetails;
+export default Movies;

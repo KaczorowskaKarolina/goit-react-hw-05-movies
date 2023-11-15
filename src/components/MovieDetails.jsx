@@ -1,11 +1,9 @@
-import React, { useEffect, useState, Suspense } from 'react';
-import { Route, Routes, useParams, Link } from 'react-router-dom';
+// MovieDetails.jsx
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
-const Cast = React.lazy(() => import('./Cast'));
-const Reviews = React.lazy(() => import('./Reviews'));
-
-const MovieDetails = ({ REACT_APP_API_KEY }) => {
+const MovieDetails = ({ apiKey, baseImageUrl }) => {
   const { movieId } = useParams();
   const [movieDetails, setMovieDetails] = useState(null);
 
@@ -13,41 +11,32 @@ const MovieDetails = ({ REACT_APP_API_KEY }) => {
     const fetchMovieDetails = async () => {
       try {
         const response = await axios.get(
-          `https://api.themoviedb.org/3/movie/${movieId}?api_key=${REACT_APP_API_KEY}`
+          `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}`
         );
 
-        if (response.status !== 200) {
-          throw new Error('Failed to fetch movie details');
+        if (response.status === 200) {
+          setMovieDetails(response.data);
         }
-
-        setMovieDetails(response.data);
       } catch (error) {
         console.error('Error fetching movie details:', error.message);
       }
     };
 
     fetchMovieDetails();
-  }, [REACT_APP_API_KEY, movieId]);
+  }, [apiKey, movieId]);
 
   return (
     <div>
       {movieDetails ? (
         <div>
           <h2>{movieDetails.title}</h2>
+          <img src={`${baseImageUrl}${movieDetails.poster_path}`} alt={movieDetails.title} />
           <p>{movieDetails.overview}</p>
-          <Link to={`/movies/${movieId}/cast`}>View Cast</Link>
-          <Link to={`/movies/${movieId}/reviews`}>View Reviews</Link>
+          {/* Dodaj inne informacje o filmie, jeśli są potrzebne */}
         </div>
       ) : (
         <div>Loading...</div>
       )}
-
-      <Suspense fallback={<div>Loading...</div>}>
-        <Routes>
-          <Route path="cast" element={<Cast apiKey={REACT_APP_API_KEY} movieId={movieId} />} />
-          <Route path="reviews" element={<Reviews apiKey={REACT_APP_API_KEY} movieId={movieId} />} />
-        </Routes>
-      </Suspense>
     </div>
   );
 };
