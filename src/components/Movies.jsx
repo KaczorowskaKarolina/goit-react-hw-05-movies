@@ -84,7 +84,7 @@ const Movies = ({ apiKey }) => {
                 src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
                 alt={movie.title}
               />
-              <p>{movie.overview}</p>
+              <p>{movie.title}</p>
               <p>Genres: {getGenreNames(movie.genre_ids)}</p>
             </Link>
           </li>

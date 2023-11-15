@@ -26,12 +26,13 @@ const Trending = () => {
   return (
     <div>
       {trendingMovies.map((movie) => (
-        <MovieDetails
-          key={movie.id}
-          apiKey="process.env.REACT_APP_API_KEY;"
-          baseImageUrl="https://image.tmdb.org/t/p/w200"
-          movieId={movie.id}
-        />
+        <div key={movie.id}>
+          <MovieDetails apiKey={process.env.REACT_APP_API_KEY} movieId={movie.id} />
+          <img
+            src={`https://image.tmdb.org/t/p/w200`}
+            alt={movie.title}
+          />
+        </div>
       ))}
     </div>
   );

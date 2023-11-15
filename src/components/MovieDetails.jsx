@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import './movieDetails.css'; 
+import './movieDetails.css';
+import Cast from './Cast'; // Import komponentu Cast
+import Reviews from './Reviews'; // Import komponentu Reviews
 
 const MovieDetails = ({ apiKey, baseImageUrl }) => {
   const { movieId } = useParams();
@@ -12,7 +14,6 @@ const MovieDetails = ({ apiKey, baseImageUrl }) => {
       try {
         const response = await axios.get(
           `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}`
-  
         );
 
         if (response.status === 200) {
@@ -31,9 +32,24 @@ const MovieDetails = ({ apiKey, baseImageUrl }) => {
       {movieDetails ? (
         <div className="MovieDetails_content">
           <h2 className="MovieDetails_h2">{movieDetails.title}</h2>
-          <img className="MovieDetails_img" src={`${baseImageUrl}${movieDetails.poster_path}`} alt={movieDetails.title} />
+          <img
+            className="MovieDetails_img"
+            src={`https://image.tmdb.org/t/p/w200${movieDetails.poster_path}`}
+            alt={movieDetails.title}
+          />
           <p className="MovieDetails_p">{movieDetails.overview}</p>
+          <p className="MovieDetails_p">{movieDetails.tagline}</p>
+          <p className="MovieDetails_p">{movieDetails.video}</p>
+          <p className="MovieDetails_p">{movieDetails.vote_average}</p>
+          <p className="MovieDetails_p">{movieDetails.vote_count}</p>
+          <p className="MovieDetails_p">{movieDetails.status}</p>
+          <p className="MovieDetails_p">{movieDetails.runtime}</p>
+          <p className="MovieDetails_p">{movieDetails.release_date}</p>
           {/* Dodaj inne informacje o filmie, jeśli są potrzebne */}
+          
+          {/* Dodaj Cast i Reviews z odpowiednimi propsami */}
+          <Cast apiKey={apiKey} movieId={movieId} />
+          <Reviews apiKey={apiKey} movieId={movieId} />
         </div>
       ) : (
         <div className="MovieDetails_loading">Loading...</div>
