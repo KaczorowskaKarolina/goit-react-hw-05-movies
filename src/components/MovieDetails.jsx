@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import './movieDetails.css';
 import Cast from './Cast'; // Import komponentu Cast
@@ -8,6 +8,8 @@ import Reviews from './Reviews'; // Import komponentu Reviews
 const MovieDetails = ({ apiKey, baseImageUrl }) => {
   const { movieId } = useParams();
   const [movieDetails, setMovieDetails] = useState(null);
+  const [isCastVisible, setIsCastVisible] = useState(false);
+  const [isReviewsVisible, setIsReviewsVisible] = useState(false);
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -26,6 +28,14 @@ const MovieDetails = ({ apiKey, baseImageUrl }) => {
 
     fetchMovieDetails();
   }, [apiKey, movieId]);
+
+  const toggleCastVisibility = () => {
+    setIsCastVisible(!isCastVisible);
+  };
+
+  const toggleReviewsVisibility = () => {
+    setIsReviewsVisible(!isReviewsVisible);
+  };
 
   return (
     <div className="MovieDetails_div">
@@ -47,9 +57,12 @@ const MovieDetails = ({ apiKey, baseImageUrl }) => {
           <p className="MovieDetails_p">{movieDetails.release_date}</p>
           {/* Dodaj inne informacje o filmie, jeśli są potrzebne */}
           
-          {/* Dodaj Cast i Reviews z odpowiednimi propsami */}
-          <Cast apiKey={apiKey} movieId={movieId} />
-          <Reviews apiKey={apiKey} movieId={movieId} />
+          {/* Dodaj linki do Cast i Reviews */}
+          <Link to="#" onClick={toggleCastVisibility}>Show Cast</Link>
+          {isCastVisible && <Cast apiKey={apiKey} movieId={movieId} close={toggleCastVisibility} />}
+
+          <Link to="#" onClick={toggleReviewsVisibility}>Show Reviews</Link>
+          {isReviewsVisible && <Reviews apiKey={apiKey} movieId={movieId} close={toggleReviewsVisibility} />}
         </div>
       ) : (
         <div className="MovieDetails_loading">Loading...</div>
