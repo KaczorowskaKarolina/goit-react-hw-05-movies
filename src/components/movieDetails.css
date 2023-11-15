@@ -1,0 +1,40 @@
+/* MovieDetails.css */
+
+.MovieDetails_div {
+    max-width: 600px;
+    margin: 20px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+.MovieDetails_content {
+    text-align: center;
+}
+
+.MovieDetails_h2 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.MovieDetails_img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.MovieDetails_p {
+    color: #666;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.MovieDetails_loading {
+    text-align: center;
+    color: #999;
+    font-size: 18px;
+    padding: 20px;
+}

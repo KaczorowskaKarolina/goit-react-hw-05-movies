@@ -1,4 +1,4 @@
-body {
+/* body {
     margin: 20px;
     padding: 200px;
     background-color: #370d50;
@@ -68,4 +68,98 @@ display: flex;
 li {
     display: flex;
         justify-content: center;
+} */
+
+/* ***
+body {
+    margin: 0;
+    padding: 0;
 }
+
+header {
+    width: 100%;
+    background-color: #333;
+  
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+li {
+    margin-right: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+  
+    font-weight: bold;
+}
+
+a:hover {
+    color: lightgray;
+    
+}
+*** */
+
+
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.app_header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #ef71f6;
+    padding: 12px;
+    z-index: 1000;
+}
+
+.app_nav {
+    display: flex;
+    justify-content: space-between;
+}
+
+.app_ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+.app_li {
+    margin-right: 20px;
+}
+
+/* Dodatkowe style dla linków */
+a {
+    text-decoration: none;
+    color: #007bff;
+    /* Kolor linków */
+}
+
+a:hover {
+    text-decoration: underline;
+    /* Podkreślenie linku po najechaniu myszką */
+}
+

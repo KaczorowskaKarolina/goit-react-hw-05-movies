@@ -1,4 +1,4 @@
-body {
+/* body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
         'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -78,4 +78,14 @@ ul {
 
 li {
     margin-bottom: 20px;
-}
+} */
+
+.back-link {
+    display: block;
+    margin-bottom: 10px;
+    /* Dostosuj odległość od pozostałych elementów */
+    text-decoration: none;
+    color: #000;
+    /* Dostosuj kolor tekstu */
+    font-size: 16px;
+    /* Dostosuj rozmiar tekstu */}

@@ -1,15 +1,18 @@
+// Movies.js
+
 import React, { useState, useEffect, useCallback, Suspense } from 'react';
 import axios from 'axios';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import MovieDetails from './MovieDetails';
 import './movies.css';
 
 const Movies = ({ apiKey }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
-  const [genres, setGenres] = useState({}); // Define genres state
+  const [genres, setGenres] = useState({});
 
   const { movieId } = useParams();
+  const navigate = useNavigate();
 
   const handleSearch = useCallback(async () => {
     try {
@@ -38,43 +41,63 @@ const Movies = ({ apiKey }) => {
       }
     };
 
-    fetchGenres(); // Move fetchGenres inside the useEffect callback
+    fetchGenres();
     handleSearch();
-  }, [apiKey, handleSearch]); // Use correct dependency array
+  }, [apiKey, handleSearch]);
 
   const getGenreNames = (genreIds) => {
     return genreIds.map((genreId) => genres[genreId]).join(', ');
   };
 
   return (
-  <div>
-    <h2>Movies</h2>
-    <input
-      type="text"
-      placeholder="movie title..."
-      value={searchTerm}
-      onChange={(e) => setSearchTerm(e.target.value)}
-    />
-    <button onClick={handleSearch}>Search</button>
-    <ul>
-      {searchResults.map((movie) => (
-        <li key={movie.id}>
-          <Link to={`/movies/${movie.id}`}>
-            <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={movie.title} />
-            <p>{movie.overview}</p>
-            <p>Genres: {getGenreNames(movie.genre_ids)}</p>
-          </Link>
-        </li>
-      ))}
-    </ul>
+    <div>
+      <header className="app_header">
+        <nav className="app_nav">
+          <ul className="app_ul">
+            <li className="app_li">
+              <Link to="/">Home</Link>
+            </li>
+            <li className="app_li">
+              <Link to="/movies">Movies</Link>
+            </li>
+          </ul>
+        </nav>
+      </header>
+      <h2>Movies</h2>
+      {movieId && (
+        <Link to="/home" className="back-link" onClick={() => navigate(-1)}>
+          Back
+        </Link>
+      )}
+      <input
+        type="text"
+        placeholder="movie title..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
+      <button onClick={handleSearch}>Search</button>
+      <ul>
+        {searchResults.map((movie) => (
+          <li key={movie.id}>
+            <Link to={`/movies/${movie.id}`}>
+              <img
+                src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+                alt={movie.title}
+              />
+              <p>{movie.overview}</p>
+              <p>Genres: {getGenreNames(movie.genre_ids)}</p>
+            </Link>
+          </li>
+        ))}
+      </ul>
 
-    {movieId && (
-      <Suspense fallback={<div>Loading...</div>}>
-        <MovieDetails apiKey={apiKey} movieId={movieId} />
-      </Suspense>
-    )}
-  </div>
-);
+      {movieId && (
+        <Suspense fallback={<div>Loading...</div>}>
+          <MovieDetails apiKey={apiKey} movieId={movieId} />
+        </Suspense>
+      )}
+    </div>
+  );
 };
 
 export default Movies;

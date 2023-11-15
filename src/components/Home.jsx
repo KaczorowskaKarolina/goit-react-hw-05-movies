@@ -22,11 +22,11 @@ const Home = ({ apiKey }) => {
   }, [apiKey]);
 
   return (
-    <div>
-      <h2>Trending Today</h2>
-      <ul>
+    <div className="home_div">
+      <h2 className="home_h2">Trending Today</h2>
+      <ul className="home_ul">
         {trending.map((item) => (
-          <li key={item.id}>
+          <li className="home_li" key={item.id}>
             <Link to={`/movies/${item.id}`}>{item.title || item.name}</Link>
           </li>
         ))}

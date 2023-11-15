@@ -17,13 +17,13 @@ const App = () => {
 
   return (
     <Router>
-      <header>
-        <nav>
-          <ul>
-            <li>
+      <header className="app_header">
+        <nav className="app_nav">
+          <ul className="app_ul">
+            <li className="app_li">
               <Link to="/">Home</Link>
             </li>
-            <li>
+            <li className="app_li">
               <Link to="/movies">Movies</Link>
             </li>
            
