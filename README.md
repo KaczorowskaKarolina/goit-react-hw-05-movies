@@ -54,7 +54,7 @@ content closes.
 
 ---
 
-![Project structure](src/AtomicDEsign.jpg)
+![Project structure](src/AtomicDesign.jpg)
 
 ## Author
 
