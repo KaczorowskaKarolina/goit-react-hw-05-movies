@@ -43,6 +43,12 @@ const Movies = ({ apiKey }) => {
     handleSearch();
   }, [apiKey, handleSearch]);
 
+  const getPosterPath = (movie) => {
+    return movie.poster_path
+      ? `https://image.tmdb.org/t/p/w200${movie.poster_path}`
+      : `${process.env.PUBLIC_URL}/poster.jpg`; // Zastępczy plakat ze wskazanej ścieżki
+  };
+
   const getGenreNames = (genreIds) => {
     return genreIds.map((genreId) => genres[genreId]).join(', ');
   };
@@ -62,40 +68,42 @@ const Movies = ({ apiKey }) => {
         </nav>
       </header>
       <div className="movies_container2">
-      <h2 className='movies_h2'>Movie:</h2>
-      {movieId && (
-        <Link to="/home" className="back-link" onClick={() => navigate(-1)}>
-          Back
-        </Link>
+        <h2 className='movies_h2'>Movie:</h2>
+        {movieId && (
+          <Link to="/home" className="back-link" onClick={() => navigate(-1)}>
+            Back
+          </Link>
         )}
-        
-      <input
-  type="text"
-  placeholder="Search movie title..."
-  value={searchTerm}
-  onChange={(e) => setSearchTerm(e.target.value)}
-  className="search-input"
-/>
 
-<button onClick={handleSearch} className="search-button">
-  Search
-</button>
-</div>
-<ul className="movies_list">
-  {searchResults.map((movie) => (
-    <li key={movie.id} className="movies_item">
-      <Link to={`/movies/${movie.id}`} className="movies_item">
-        <img
-          src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
-          alt={movie.title}
-          className="movies_image"
+        <input
+          type="text"
+          placeholder="Search movie title..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="search-input"
         />
-        <p>{movie.title}</p>
-        <p>Genres: {getGenreNames(movie.genre_ids)}</p>
-      </Link>
-    </li>
-  ))}
-</ul>
+
+        <button onClick={handleSearch} className="search-button">
+          Search
+        </button>
+      </div>
+      <ul className="movies_list">
+        {searchResults.map((movie) => (
+          <li key={movie.id} className="movies_item">
+            <Link to={`/movies/${movie.id}`} className="movies_item">
+              <img
+                src={getPosterPath(movie)}
+                alt={movie.title}
+                className="movies_image"
+              />
+            </Link>
+            <Link>
+              <p>{movie.title}</p>
+            </Link>
+            <p className="movies_genres">Genres: {getGenreNames(movie.genre_ids)}</p>
+          </li>
+        ))}
+      </ul>
 
       {movieId && (
         <Suspense fallback={<div>Loading...</div>}>

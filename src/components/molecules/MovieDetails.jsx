@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, Link, useHistory } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './movieDetails.css';
 import Cast from '../atoms/Cast';
 import Reviews from './Reviews';
 
 const MovieDetails = ({ apiKey, baseImageUrl }) => {
-  const { movieId } = useParams();
+  const { movieId, prevPath } = useParams();
   const [movieDetails, setMovieDetails] = useState(null);
   const [isCastVisible, setIsCastVisible] = useState(false);
   const [isReviewsVisible, setIsReviewsVisible] = useState(false);
-  const history = useHistory(); // Poprawione
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -39,7 +39,7 @@ const MovieDetails = ({ apiKey, baseImageUrl }) => {
   };
 
   const goBack = () => {
-    history.goBack();
+    navigate(prevPath || '/movies'); 
   };
 
   return (
@@ -73,11 +73,11 @@ const MovieDetails = ({ apiKey, baseImageUrl }) => {
           {isReviewsVisible && (
             <Reviews apiKey={apiKey} movieId={movieId} close={toggleReviewsVisibility} />
           )}
-
-          {/* Link "go back" */}
+<p>
           <button className="MovieDetails_goBack" onClick={goBack}>
             Go Back
-          </button>
+            </button>
+            </p>
         </div>
       ) : (
         <div className="MovieDetails_loading">Loading...</div>

@@ -75,3 +75,22 @@ text-decoration: none;
         font-weight: bold;
     }
 }
+
+.MovieDetails_goBack {
+    margin: 10px;
+        padding: 8px 12px;
+        background-color: orange;
+        border: none;
+        border-radius: 25px;
+        color: #ffffff;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    
+        &:hover,
+        &:active {
+            background-color: yellowgreen;
+            color: grey;
+            font-size: large;
+        }
+}
