@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import './cast.css';
 
 const Cast = ({ apiKey, movieId }) => {
   const [cast, setCast] = useState([]);
