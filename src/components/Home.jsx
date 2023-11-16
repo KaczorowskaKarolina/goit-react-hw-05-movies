@@ -22,7 +22,7 @@ const Home = ({ apiKey }) => {
   }, [apiKey]);
 
   return (
-    <div className="home_div">
+    <div className="home_container">
       <h2 className="home_h2">Trending Today</h2>
       <ul className="home_ul">
         {trending.map((item) => (

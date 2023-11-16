@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import './movieDetails.css';
-import Cast from './Cast'; // Import komponentu Cast
-import Reviews from './Reviews'; // Import komponentu Reviews
+import Cast from './Cast';
+import Reviews from './Reviews';
 
 const MovieDetails = ({ apiKey, baseImageUrl }) => {
   const { movieId } = useParams();
   const [movieDetails, setMovieDetails] = useState(null);
   const [isCastVisible, setIsCastVisible] = useState(false);
   const [isReviewsVisible, setIsReviewsVisible] = useState(false);
+  const history = useHistory(); // Poprawione
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -37,32 +38,46 @@ const MovieDetails = ({ apiKey, baseImageUrl }) => {
     setIsReviewsVisible(!isReviewsVisible);
   };
 
+  const goBack = () => {
+    history.goBack();
+  };
+
   return (
-    <div className="MovieDetails_div">
+    <div className="MovieDetails_container">
       {movieDetails ? (
         <div className="MovieDetails_content">
-          <h2 className="MovieDetails_h2">{movieDetails.title}</h2>
+          <h2 className="MovieDetails_h2">
+            {movieDetails.title} ({movieDetails.release_date})
+          </h2>
           <img
             className="MovieDetails_img"
             src={`https://image.tmdb.org/t/p/w200${movieDetails.poster_path}`}
             alt={movieDetails.title}
           />
-          <p className="MovieDetails_p">{movieDetails.overview}</p>
-          <p className="MovieDetails_p">{movieDetails.tagline}</p>
-          <p className="MovieDetails_p">{movieDetails.video}</p>
-          <p className="MovieDetails_p">{movieDetails.vote_average}</p>
-          <p className="MovieDetails_p">{movieDetails.vote_count}</p>
-          <p className="MovieDetails_p">{movieDetails.status}</p>
-          <p className="MovieDetails_p">{movieDetails.runtime}</p>
-          <p className="MovieDetails_p">{movieDetails.release_date}</p>
-          {/* Dodaj inne informacje o filmie, jeśli są potrzebne */}
-          
-          {/* Dodaj linki do Cast i Reviews */}
-          <Link to="#" onClick={toggleCastVisibility}>Show Cast</Link>
-          {isCastVisible && <Cast apiKey={apiKey} movieId={movieId} close={toggleCastVisibility} />}
 
-          <Link to="#" onClick={toggleReviewsVisibility}>Show Reviews</Link>
-          {isReviewsVisible && <Reviews apiKey={apiKey} movieId={movieId} close={toggleReviewsVisibility} />}
+          <p className="MovieDetails_title">
+            <strong>Overview:</strong>
+          </p>
+          <p className="MovieDetails_overview">{movieDetails.overview}</p>
+
+          <p className="MovieDetails_runtime">Runtime: {movieDetails.runtime} min</p>
+          <p className="MovieDetails_info">Additional information:</p>
+          <Link to="#" onClick={toggleCastVisibility}>
+            Cast
+          </Link>
+          {isCastVisible && <Cast apiKey={apiKey} movieId={movieId} close={toggleCastVisibility} />}
+          <p></p>
+          <Link to="#" onClick={toggleReviewsVisibility}>
+            Reviews
+          </Link>
+          {isReviewsVisible && (
+            <Reviews apiKey={apiKey} movieId={movieId} close={toggleReviewsVisibility} />
+          )}
+
+          {/* Link "go back" */}
+          <button className="MovieDetails_goBack" onClick={goBack}>
+            Go Back
+          </button>
         </div>
       ) : (
         <div className="MovieDetails_loading">Loading...</div>

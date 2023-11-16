@@ -1,128 +1,12 @@
-/* body {
-    margin: 20px;
-    padding: 200px;
+body {
+    margin: 0;
+    padding: 0;
     background-color: #370d50;
     color: #a98ec2;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-   
-}
-
-header {
-    background-color: #894fbf;
-    padding: 10px;
-    position: sticky;
-    top: 15px;
-    z-index: 100;
-    display: flex;
-    justify-content: center;
-    height: 4vh;
-    border-radius: 25px;
-
-}
-
-nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-}
-
-nav ul li {
-    margin-right: 15px;
-}
-
-nav ul li a {
-    text-decoration: none;
-    color: #fff;
-    font-weight: bold;
-    
-}
-
-nav ul li a:hover {
-    color: pink;
-    font-size: 1.25em;
-    font-weight: bold;
-}
-
-nav ul li a.active {
-    font-weight: bold;
-    color: #ffcc00;
-}
-
-ul {
-    list-style-type: none;
-}
-
-nav ul li a[href="/movies"].active {
-    color: #ffcc00;
-}
-
-h2 {
-display: flex;
-    justify-content: center;
-}
-
-li {
-    display: flex;
-        justify-content: center;
-} */
-
-/* ***
-body {
-    margin: 0;
-    padding: 0;
-}
-
-header {
-    width: 100%;
-    background-color: #333;
-  
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-}
-
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    
-}
-
-ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-}
-
-li {
-    margin-right: 20px;
-}
-
-a {
-    text-decoration: none;
-    color: black;
-  
-    font-weight: bold;
-}
-
-a:hover {
-    color: lightgray;
-    
-}
-*** */
-
-
-
-body {
-    margin: 0;
-    padding: 0;
+    height: 100%;
 }
 
 .app_header {
@@ -130,36 +14,42 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    background-color: #ef71f6;
-    padding: 12px;
     z-index: 1000;
-}
-
-.app_nav {
+    background-color: #894fbf;
+    padding: 15px;
     display: flex;
-    justify-content: space-between;
-}
+    justify-content: center;
+    align-items: center;
+    height: 4vh;
 
-.app_ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-}
+    & .app_nav {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
-.app_li {
-    margin-right: 20px;
-}
+    & .app_ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        align-items: center;
+    }
 
-/* Dodatkowe style dla linków */
-a {
-    text-decoration: none;
-    color: #007bff;
-    /* Kolor linków */
-}
+    & .app_li {
+        margin-right: 20px;
+    }
 
-a:hover {
-    text-decoration: underline;
-    /* Podkreślenie linku po najechaniu myszką */
-}
+    & a {
+        text-decoration: none;
+        color: #ffffff;
+        font-weight: bold;
 
+        &:hover,
+        &:active {
+            color: pink;
+            font-size: 1.25em;
+            font-weight: bold;
+        }
+    }
+}

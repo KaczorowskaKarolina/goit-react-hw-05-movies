@@ -1,5 +1,3 @@
-// Movies.js
-
 import React, { useState, useEffect, useCallback, Suspense } from 'react';
 import axios from 'axios';
 import { Link, useParams, useNavigate } from 'react-router-dom';
@@ -50,7 +48,7 @@ const Movies = ({ apiKey }) => {
   };
 
   return (
-    <div>
+    <div className='movies_container'>
       <header className="app_header">
         <nav className="app_nav">
           <ul className="app_ul">
@@ -63,33 +61,41 @@ const Movies = ({ apiKey }) => {
           </ul>
         </nav>
       </header>
-      <h2>Movies</h2>
+      <div className="movies_container2">
+      <h2 className='movies_h2'>Movie:</h2>
       {movieId && (
         <Link to="/home" className="back-link" onClick={() => navigate(-1)}>
           Back
         </Link>
-      )}
+        )}
+        
       <input
-        type="text"
-        placeholder="movie title..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-      />
-      <button onClick={handleSearch}>Search</button>
-      <ul>
-        {searchResults.map((movie) => (
-          <li key={movie.id}>
-            <Link to={`/movies/${movie.id}`}>
-              <img
-                src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
-                alt={movie.title}
-              />
-              <p>{movie.title}</p>
-              <p>Genres: {getGenreNames(movie.genre_ids)}</p>
-            </Link>
-          </li>
-        ))}
-      </ul>
+  type="text"
+  placeholder="Search movie title..."
+  value={searchTerm}
+  onChange={(e) => setSearchTerm(e.target.value)}
+  className="search-input"
+/>
+
+<button onClick={handleSearch} className="search-button">
+  Search
+</button>
+</div>
+<ul className="movies_list">
+  {searchResults.map((movie) => (
+    <li key={movie.id} className="movies_item">
+      <Link to={`/movies/${movie.id}`} className="movies_item">
+        <img
+          src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+          alt={movie.title}
+          className="movies_image"
+        />
+        <p>{movie.title}</p>
+        <p>Genres: {getGenreNames(movie.genre_ids)}</p>
+      </Link>
+    </li>
+  ))}
+</ul>
 
       {movieId && (
         <Suspense fallback={<div>Loading...</div>}>

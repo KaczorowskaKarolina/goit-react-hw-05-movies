@@ -1,24 +1,40 @@
-.home_div {
-    padding: 20px;
-    /* Wewnętrzny odstęp dla div */
-    margin-top: 60px;
-    /* Odległość od góry równa wysokości app_header */
-    position: relative;
-    /* Stała pozycja */
+.home_container {
+    margin: 12vh;
+    max-width: 100%;
 }
 
 .home_h2 {
-    color: #333;
-    /* Kolor tekstu dla nagłówka */
+    margin-top: 10px;
+    font-size: 25px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .home_ul {
     list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
     padding: 0;
-}
+    margin: 0;
 
-.home_li {
-    margin-bottom: 10px;
-    /* Odstęp między elementami listy */
-}
+    .home_li {
+        margin: 5px;
 
+        a {
+            text-decoration: none;
+            color: #d8d8d8;
+            font-weight: light;
+            font-size: 15px;
+            transition: color 0.3s ease;
+
+            &:hover {
+                color: pink;
+                font-size: 18px;
+            }
+        }
+    }
+}

@@ -1,6 +1,4 @@
-// import dotenv from 'dotenv';
 import React, { Suspense } from 'react';
-// import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 
 import './app.css';
@@ -26,7 +24,6 @@ const App = () => {
             <li className="app_li">
               <Link to="/movies">Movies</Link>
             </li>
-           
           </ul>
         </nav>
       </header>
