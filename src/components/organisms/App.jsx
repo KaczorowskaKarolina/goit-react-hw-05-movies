@@ -3,12 +3,12 @@ import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 
 import './app.css';
 
-const Home = React.lazy(() => import('../components/Home'));
-const Movies = React.lazy(() => import('../components/Movies'));
-const MovieDetails = React.lazy(() => import('../components/MovieDetails'));
-const Cast = React.lazy(() => import('../components/Cast'));
-const Reviews = React.lazy(() => import('../components/Reviews'));
-const Trending = React.lazy(() => import('../components/Trending'));
+const Home = React.lazy(() => import('../pages/Home'));
+const Movies = React.lazy(() => import('../pages/Movies'));
+const MovieDetails = React.lazy(() => import('../molecules/MovieDetails'));
+const Cast = React.lazy(() => import('../atoms/Cast'));
+const Reviews = React.lazy(() => import('../molecules/Reviews'));
+const Trending = React.lazy(() => import('../pages/Trending'));
 
 const App = () => {
   const apiKey = process.env.REACT_APP_API_KEY;

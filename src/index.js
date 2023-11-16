@@ -1,7 +1,7 @@
 // import dotenv from 'dotenv';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import  App from './App/App';
+import  App from './components/organisms/App';
 import './index.css';
 
 

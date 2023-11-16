@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import './movieDetails.css';
-import Cast from './Cast';
+import Cast from '../atoms/Cast';
 import Reviews from './Reviews';
 
 const MovieDetails = ({ apiKey, baseImageUrl }) => {

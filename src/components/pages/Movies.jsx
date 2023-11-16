@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, Suspense } from 'react';
 import axios from 'axios';
 import { Link, useParams, useNavigate } from 'react-router-dom';
-import MovieDetails from './MovieDetails';
+import MovieDetails from '../molecules/MovieDetails';
 import './movies.css';
 
 const Movies = ({ apiKey }) => {

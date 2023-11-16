@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import MovieDetails from './MovieDetails';
+import MovieDetails from '../molecules/MovieDetails';
 import './trending.css';
 
 const Trending = () => {
